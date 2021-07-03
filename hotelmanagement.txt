@@ -1,0 +1,849 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 01, 2021 at 04:08 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.2.31
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `hotelmanagement`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accommodation`
+--
+
+CREATE TABLE `accommodation` (
+  `CustId` int(11) NOT NULL,
+  `ArrDate` date DEFAULT NULL,
+  `DepDate` date DEFAULT NULL,
+  `RoomNo` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `accommodation`
+--
+
+INSERT INTO `accommodation` (`CustId`, `ArrDate`, `DepDate`, `RoomNo`) VALUES
+(1, '2020-04-14', '2020-04-19', 'A1'),
+(2, '2020-03-30', '2020-04-14', 'A2'),
+(3, '2020-04-25', '2020-05-03', 'A4'),
+(4, '2020-03-12', '2020-03-23', 'A3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking`
+--
+
+CREATE TABLE `booking` (
+  `ConfId` varchar(10) NOT NULL,
+  `CustId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`ConfId`, `CustId`) VALUES
+('California', 2),
+('Miami', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `conference_events_center`
+--
+
+CREATE TABLE `conference_events_center` (
+  `ConfId` varchar(10) NOT NULL,
+  `Date` date DEFAULT NULL,
+  `StartTime` time DEFAULT NULL,
+  `FinishTime` time DEFAULT NULL,
+  `ConfCharges` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `conference_events_center`
+--
+
+INSERT INTO `conference_events_center` (`ConfId`, `Date`, `StartTime`, `FinishTime`, `ConfCharges`) VALUES
+('california', '2020-04-05', '08:00:00', '11:00:00', '500000'),
+('Miami', '2020-03-15', '16:00:00', '18:00:00', '1000000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `conference_events_center_service`
+--
+
+CREATE TABLE `conference_events_center_service` (
+  `ConfId` varchar(10) NOT NULL,
+  `MealType` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `conference_events_center_service`
+--
+
+INSERT INTO `conference_events_center_service` (`ConfId`, `MealType`) VALUES
+('california', 'Buffet'),
+('Miami', 'Beef');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custactivity`
+--
+
+CREATE TABLE `custactivity` (
+  `CustId` int(11) NOT NULL,
+  `Spa_Sauna_Id` varchar(10) DEFAULT NULL,
+  `SyName` varchar(20) DEFAULT NULL,
+  `SwName` varchar(10) DEFAULT NULL,
+  `MealType` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `custactivity`
+--
+
+INSERT INTO `custactivity` (`CustId`, `Spa_Sauna_Id`, `SyName`, `SwName`, `MealType`) VALUES
+(1, 'sauna', 'spa_and_sauna', 'Mawepool', 'beef'),
+(2, 'spa', 'spa_and_sauna', 'kibo_pool', 'Chicken'),
+(3, 'spa', 'spa_and_sauna', 'kibo_pool', 'buffet');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custphone`
+--
+
+CREATE TABLE `custphone` (
+  `CustId` int(11) NOT NULL,
+  `CustPhone` varchar(13) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `custphone`
+--
+
+INSERT INTO `custphone` (`CustId`, `CustPhone`) VALUES
+(1, '0734567890'),
+(2, '0798765444'),
+(3, '0698654446'),
+(4, '0768906089'),
+(5, '0612345678');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee`
+--
+
+CREATE TABLE `employee` (
+  `EmployeeId` varchar(10) NOT NULL,
+  `Fname` varchar(20) NOT NULL,
+  `Lname` varchar(20) NOT NULL,
+  `Position` varchar(20) NOT NULL,
+  `Address` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`EmployeeId`, `Fname`, `Lname`, `Position`, `Address`) VALUES
+('A01', 'Millen', 'Anthony', 'room attendant', 'makumbusho'),
+('L01', 'Tina', 'Andrew', 'Cleaner', 'majengo'),
+('LH01', 'Thony', 'David', 'Manager', 'Sinai'),
+('M01', 'angela', 'Jovin', 'Manager', 'Sinai'),
+('R01', 'Vivian', 'Edward', 'Waiter', 'Soweto'),
+('RM02', 'Anna', 'sanga', 'Supervisor', 'Soweto'),
+('RS01', 'Chris', 'Haule', 'Manager', 'Ruvu'),
+('SG01', 'Meshack', 'Mialla', 'Driver', 'Arusha Chini'),
+('T01', 'Emmanuel', 'Muhale', 'Clerk', 'kabwe');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employeephone`
+--
+
+CREATE TABLE `employeephone` (
+  `EmployeeId` varchar(10) NOT NULL,
+  `EmployeePhone` varchar(13) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hire`
+--
+
+CREATE TABLE `hire` (
+  `VehicleId` char(10) NOT NULL,
+  `TourCompany` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hire`
+--
+
+INSERT INTO `hire` (`VehicleId`, `TourCompany`) VALUES
+('T123 ABC', 'HKAdventures'),
+('T246 VFY', 'KiliTours'),
+('T346 NJM', 'Kiliwonders'),
+('T980 FRT', 'kiliadventures');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotel`
+--
+
+CREATE TABLE `hotel` (
+  `SyName` varchar(20) NOT NULL,
+  `SyEmail` varchar(50) NOT NULL,
+  `SyPhone` varchar(13) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hotel`
+--
+
+INSERT INTO `hotel` (`SyName`, `SyEmail`, `SyPhone`) VALUES
+('Accomodation', 'accomodation@mamaland.com', '0752345678'),
+('conference_and_event', 'conferenceandevents@mamaland.com', '0763452678'),
+('laundry', 'laundry@mamaland.com', '0756234738'),
+('restaurant', 'restaurant@mamaland.com', '0743203524'),
+('spa_and_sauna', 'spaandsauna@mamaland.com', '0789563421'),
+('sports_and_games', 'sportsandgames@mamaland.com', '0789654321'),
+('tour', 'tour@mamaland.com', '0643299000'),
+('transport', 'transport@mamaland.com', '0654234567');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotelemp`
+--
+
+CREATE TABLE `hotelemp` (
+  `EmployeeId` varchar(10) NOT NULL,
+  `SyName` varchar(10) NOT NULL,
+  `Attendance` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hotelemp`
+--
+
+INSERT INTO `hotelemp` (`EmployeeId`, `SyName`, `Attendance`) VALUES
+('A01', 'Accomodati', 'present'),
+('L01', 'Laundry', 'present'),
+('R01', 'Restaurant', 'present'),
+('SG01', 'Sports_and', 'absent'),
+('T01', 'Transport', 'present');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laundry`
+--
+
+CREATE TABLE `laundry` (
+  `LaundId` varchar(10) NOT NULL,
+  `ClothQtty` int(11) DEFAULT NULL,
+  `ClothType` varchar(10) DEFAULT NULL,
+  `LaundCost` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `laundry`
+--
+
+INSERT INTO `laundry` (`LaundId`, `ClothQtty`, `ClothType`, `LaundCost`) VALUES
+('LA1', 3, 'Cotton', '3000'),
+('LA2', 5, 'Silk', '5000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laundry_detail`
+--
+
+CREATE TABLE `laundry_detail` (
+  `LaundId` varchar(10) NOT NULL,
+  `CustId` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `laundry_detail`
+--
+
+INSERT INTO `laundry_detail` (`LaundId`, `CustId`) VALUES
+('LA1', '3'),
+('LA2', '4');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laundry_service`
+--
+
+CREATE TABLE `laundry_service` (
+  `LaundId` varchar(10) NOT NULL,
+  `RoomNo` varchar(10) NOT NULL,
+  `CustId` int(11) DEFAULT NULL,
+  `Wash` varchar(10) DEFAULT NULL,
+  `Iron` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `laundry_service`
+--
+
+INSERT INTO `laundry_service` (`LaundId`, `RoomNo`, `CustId`, `Wash`, `Iron`) VALUES
+('LA1', 'A1', 1, 'yes', 'yes'),
+('LA2', 'A3', 4, 'no', 'yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manage`
+--
+
+CREATE TABLE `manage` (
+  `SyName` varchar(20) NOT NULL,
+  `EmployeeId` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `manage`
+--
+
+INSERT INTO `manage` (`SyName`, `EmployeeId`) VALUES
+('accomodation', 'RM02'),
+('hotel', 'M01'),
+('laundry', 'LM01'),
+('restaurant', 'RM01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medical`
+--
+
+CREATE TABLE `medical` (
+  `PhyId` varchar(10) NOT NULL,
+  `Physician_Name` varchar(20) NOT NULL,
+  `PrescId` varchar(10) NOT NULL,
+  `EmployeeId` varchar(10) NOT NULL,
+  `CustId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `medical`
+--
+
+INSERT INTO `medical` (`PhyId`, `Physician_Name`, `PrescId`, `EmployeeId`, `CustId`) VALUES
+('MD05', 'Miriam Titus', 'P01', 'M01', 1),
+('NS01', 'Debora Kweka', 'P02', 'T01', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `PaytId` varchar(10) NOT NULL,
+  `CustId` int(11) DEFAULT NULL,
+  `Payment_mode` varchar(10) DEFAULT NULL,
+  `Amount` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`PaytId`, `CustId`, `Payment_mode`, `Amount`) VALUES
+('9913206938', 2, 'E-BAnking', '50000'),
+('9913208079', 5, 'cash', '1000000'),
+('9913208270', 2, 'cash', '1000000'),
+('9913208868', 1, 'SimBanking', '200000'),
+('9913209843', 3, 'SimBanking', '340000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservation`
+--
+
+CREATE TABLE `reservation` (
+  `CustId` int(11) NOT NULL,
+  `PaytId` varchar(10) NOT NULL,
+  `Date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`CustId`, `PaytId`, `Date`) VALUES
+(1, '9913209843', '2020-04-09'),
+(2, '9913206938', '2020-03-29'),
+(3, '9913208270', '2020-04-22'),
+(4, '9913208079', '2020-03-11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant`
+--
+
+CREATE TABLE `restaurant` (
+  `MealType` varchar(10) NOT NULL,
+  `MealQuantity` int(11) DEFAULT NULL,
+  `TableNo` int(11) DEFAULT NULL,
+  `CustId` int(11) NOT NULL,
+  `MealCost` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `restaurant`
+--
+
+INSERT INTO `restaurant` (`MealType`, `MealQuantity`, `TableNo`, `CustId`, `MealCost`) VALUES
+('Beef', 3, 11, 1, '5000'),
+('Buffet', 2, 10, 2, '15000'),
+('Chicken', 4, 14, 4, '35000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `room`
+--
+
+CREATE TABLE `room` (
+  `RoomNo` varchar(10) NOT NULL,
+  `Price` varchar(10) DEFAULT NULL,
+  `RoomType` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `room`
+--
+
+INSERT INTO `room` (`RoomNo`, `Price`, `RoomType`) VALUES
+('A1', '40000', 'single'),
+('A2', '35000', 'single'),
+('A3', '65000', 'Double'),
+('A4', '80000', 'Family');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `serve`
+--
+
+CREATE TABLE `serve` (
+  `EmployeeId` varchar(10) NOT NULL,
+  `CustId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `serve`
+--
+
+INSERT INTO `serve` (`EmployeeId`, `CustId`) VALUES
+('A01', 2),
+('L01', 5),
+('R01', 3),
+('T01', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `spa_sauna`
+--
+
+CREATE TABLE `spa_sauna` (
+  `Spa_Sauna_Id` varchar(10) NOT NULL,
+  `CustId` int(11) DEFAULT NULL,
+  `SCharges` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `spa_sauna`
+--
+
+INSERT INTO `spa_sauna` (`Spa_Sauna_Id`, `CustId`, `SCharges`) VALUES
+('sauna', 1, '40000'),
+('spa', 4, '50000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sports_and_games`
+--
+
+CREATE TABLE `sports_and_games` (
+  `GameName` varchar(10) NOT NULL,
+  `GameTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sports_and_games`
+--
+
+INSERT INTO `sports_and_games` (`GameName`, `GameTime`) VALUES
+('cricket', '0000-00-00 00:00:00'),
+('football', '0000-00-00 00:00:00'),
+('Karaoke', '0000-00-00 00:00:00'),
+('netball', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `swimming_pool`
+--
+
+CREATE TABLE `swimming_pool` (
+  `SwName` varchar(10) NOT NULL,
+  `CustId` int(11) DEFAULT NULL,
+  `SwCharges` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `swimming_pool`
+--
+
+INSERT INTO `swimming_pool` (`SwName`, `CustId`, `SwCharges`) VALUES
+('kibo_pool', 3, '5000'),
+('mawepool', 2, '5000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tour`
+--
+
+CREATE TABLE `tour` (
+  `TourCompany` varchar(20) NOT NULL,
+  `Toursite` varchar(20) NOT NULL,
+  `MealType` varchar(10) DEFAULT NULL,
+  `TourCharges` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tour`
+--
+
+INSERT INTO `tour` (`TourCompany`, `Toursite`, `MealType`, `TourCharges`) VALUES
+('HKAdventures', 'Ngorongoro', 'buffet', '150000'),
+('KiliTours', 'Serengeti', 'beef', '200000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transport`
+--
+
+CREATE TABLE `transport` (
+  `VehicleId` char(8) NOT NULL,
+  `Destination` varchar(10) DEFAULT NULL,
+  `Date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transport`
+--
+
+INSERT INTO `transport` (`VehicleId`, `Destination`, `Date`) VALUES
+('T123 ABC', 'Kilimani', '2020-04-30'),
+('T246 VFY', 'Sinai', '2020-03-16'),
+('T346 NJM', 'Arusha', '2020-04-02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `travel`
+--
+
+CREATE TABLE `travel` (
+  `CustId` varchar(10) NOT NULL,
+  `VehicleId` char(8) NOT NULL,
+  `RoomNo` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `travel`
+--
+
+INSERT INTO `travel` (`CustId`, `VehicleId`, `RoomNo`) VALUES
+('1', 'T980 FRT', 'A1'),
+('2', 'T346 NJM', 'A2'),
+('3', 'T123 ABC', 'A4'),
+('4', 'T246 VFY', 'A3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `treat_customer`
+--
+
+CREATE TABLE `treat_customer` (
+  `PhyId` varchar(10) NOT NULL,
+  `CustId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `treat_customer`
+--
+
+INSERT INTO `treat_customer` (`PhyId`, `CustId`) VALUES
+('MD05', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `treat_employee`
+--
+
+CREATE TABLE `treat_employee` (
+  `PhyId` varchar(10) NOT NULL,
+  `EmployeeId` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `treat_employee`
+--
+
+INSERT INTO `treat_employee` (`PhyId`, `EmployeeId`) VALUES
+('MD05', 'M01'),
+('MD05', 'T01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visits`
+--
+
+CREATE TABLE `visits` (
+  `CustId` int(11) NOT NULL,
+  `TourCompany` char(20) NOT NULL,
+  `RoomNo` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visits`
+--
+
+INSERT INTO `visits` (`CustId`, `TourCompany`, `RoomNo`) VALUES
+(2, 'HKAdventures', 'A2'),
+(3, 'HKAdventures', 'A4'),
+(4, 'KiliTours', 'A3');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `accommodation`
+--
+ALTER TABLE `accommodation`
+  ADD PRIMARY KEY (`CustId`);
+
+--
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`ConfId`,`CustId`);
+
+--
+-- Indexes for table `conference_events_center`
+--
+ALTER TABLE `conference_events_center`
+  ADD PRIMARY KEY (`ConfId`);
+
+--
+-- Indexes for table `conference_events_center_service`
+--
+ALTER TABLE `conference_events_center_service`
+  ADD PRIMARY KEY (`ConfId`);
+
+--
+-- Indexes for table `custactivity`
+--
+ALTER TABLE `custactivity`
+  ADD PRIMARY KEY (`CustId`);
+
+--
+-- Indexes for table `custphone`
+--
+ALTER TABLE `custphone`
+  ADD PRIMARY KEY (`CustId`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`EmployeeId`);
+
+--
+-- Indexes for table `employeephone`
+--
+ALTER TABLE `employeephone`
+  ADD PRIMARY KEY (`EmployeeId`);
+
+--
+-- Indexes for table `hire`
+--
+ALTER TABLE `hire`
+  ADD PRIMARY KEY (`VehicleId`,`TourCompany`);
+
+--
+-- Indexes for table `hotel`
+--
+ALTER TABLE `hotel`
+  ADD PRIMARY KEY (`SyName`);
+
+--
+-- Indexes for table `hotelemp`
+--
+ALTER TABLE `hotelemp`
+  ADD PRIMARY KEY (`EmployeeId`);
+
+--
+-- Indexes for table `laundry`
+--
+ALTER TABLE `laundry`
+  ADD PRIMARY KEY (`LaundId`);
+
+--
+-- Indexes for table `laundry_detail`
+--
+ALTER TABLE `laundry_detail`
+  ADD PRIMARY KEY (`LaundId`,`CustId`);
+
+--
+-- Indexes for table `laundry_service`
+--
+ALTER TABLE `laundry_service`
+  ADD PRIMARY KEY (`LaundId`,`RoomNo`);
+
+--
+-- Indexes for table `manage`
+--
+ALTER TABLE `manage`
+  ADD PRIMARY KEY (`SyName`);
+
+--
+-- Indexes for table `medical`
+--
+ALTER TABLE `medical`
+  ADD PRIMARY KEY (`PhyId`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`PaytId`);
+
+--
+-- Indexes for table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`CustId`,`PaytId`);
+
+--
+-- Indexes for table `restaurant`
+--
+ALTER TABLE `restaurant`
+  ADD PRIMARY KEY (`MealType`);
+
+--
+-- Indexes for table `room`
+--
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`RoomNo`);
+
+--
+-- Indexes for table `serve`
+--
+ALTER TABLE `serve`
+  ADD PRIMARY KEY (`EmployeeId`);
+
+--
+-- Indexes for table `spa_sauna`
+--
+ALTER TABLE `spa_sauna`
+  ADD PRIMARY KEY (`Spa_Sauna_Id`);
+
+--
+-- Indexes for table `sports_and_games`
+--
+ALTER TABLE `sports_and_games`
+  ADD PRIMARY KEY (`GameName`);
+
+--
+-- Indexes for table `swimming_pool`
+--
+ALTER TABLE `swimming_pool`
+  ADD PRIMARY KEY (`SwName`);
+
+--
+-- Indexes for table `tour`
+--
+ALTER TABLE `tour`
+  ADD PRIMARY KEY (`TourCompany`);
+
+--
+-- Indexes for table `transport`
+--
+ALTER TABLE `transport`
+  ADD PRIMARY KEY (`VehicleId`);
+
+--
+-- Indexes for table `travel`
+--
+ALTER TABLE `travel`
+  ADD PRIMARY KEY (`CustId`,`VehicleId`,`RoomNo`);
+
+--
+-- Indexes for table `treat_customer`
+--
+ALTER TABLE `treat_customer`
+  ADD PRIMARY KEY (`PhyId`);
+
+--
+-- Indexes for table `treat_employee`
+--
+ALTER TABLE `treat_employee`
+  ADD PRIMARY KEY (`PhyId`,`EmployeeId`);
+
+--
+-- Indexes for table `visits`
+--
+ALTER TABLE `visits`
+  ADD PRIMARY KEY (`CustId`,`TourCompany`,`RoomNo`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
